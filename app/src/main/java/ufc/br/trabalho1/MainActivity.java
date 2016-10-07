@@ -1,5 +1,6 @@
 package ufc.br.trabalho1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private AutoCompleteTextView actv;
     private String[] lista = {"Jordy","Joel","James","Jorge","Jailson"};
     private RadioGroup rg;
+    private Button longButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        longButton = (Button) findViewById(R.id.buttonLongPress);
+        longButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                longButton.setText("Eu disse lentamente");
+            }
+        });
+        longButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                longButton.setText("ISSO Aí");
+                return true;
+            }
+        });
+
+
+
     }
 
     @Override
@@ -96,7 +116,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(id == R.id.action_action)
         {
-            Toast.makeText(getBaseContext(),"Clicou na action",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this,TabActivity.class);
+            startActivity(intent);
             return true;
         }
 
